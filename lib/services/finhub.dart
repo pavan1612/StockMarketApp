@@ -14,38 +14,6 @@ class Finhub {
   var priceUpdate = new Map<Stock, Quote>();
   IOWebSocketChannel channel;
 
-  List<Stock> fetchStocks(String exchange) {
-    List<Stock> stocks = [];
-    switch (exchange) {
-      case 'US':
-        stocksUS.forEach((element) {
-          stocks.add(Stock(element['description'], element['symbol'],
-              element['currency'], element['type'], element['logo']));
-        });
-        break;
-      case 'crypto':
-        crypto.forEach((element) {
-          stocks.add(Stock(element['description'], element['symbol'],
-              element['currency'], element['type'], element['logo']));
-        });
-        break;
-      case 'forex':
-        forex.forEach((element) {
-          stocks.add(Stock(element['description'], element['symbol'],
-              element['currency'], element['type'], element['logo']));
-        });
-        break;
-      case 'all':
-        all.forEach((element) {
-          stocks.add(Stock(element['description'], element['symbol'],
-              element['currency'], element['type'], element['logo']));
-        });
-        break;
-      default:
-    }
-    return stocks;
-  }
-
   Stream fetchRealTimeExchangePrice(List<Stock> exchange) async* {
     //dont remove the below line from here
     channel = IOWebSocketChannel.connect(webSocketURL + token);
@@ -90,6 +58,7 @@ class Finhub {
     if (response.statusCode == 200) {
       var priceMap = json.decode(response.body) as Map;
       return Quote(
+          symbol,
           priceMap['o'].toString(),
           priceMap['h'].toString(),
           priceMap['l'].toString(),
@@ -141,17 +110,5 @@ class Finhub {
       }
       return data;
     }
-  }
-
-  List<Stock> searchStocks(String value) {
-    List<Stock> stocks = [];
-    all
-        .where((element) => element['description'].contains(value))
-        .forEach((element) {
-      stocks.add(Stock(element['description'], element['symbol'],
-          element['currency'], element['type'], element['logo']));
-    });
-    print('searching');
-    return stocks;
   }
 }

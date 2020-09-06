@@ -12,7 +12,12 @@ class StocksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List stocksList = context.watch<StocksProvider>().stocks;
+    final String exchange = Provider.of<StocksProvider>(context).exchange;
+    final List stocksList = Provider.of<StocksProvider>(context)
+        .stocks
+        .where((stock) => stock.type == exchange)
+        .toList();
+    // context.watch<StocksProvider>().stocks;
 
     String getPercentageShift(snapshot, index) {
       Map<Stock, Quote> stockQuote = snapshot.data;

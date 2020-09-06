@@ -1,4 +1,5 @@
 class Quote {
+  final String stockSymbol;
   final String openPrice;
   final String highPrice;
   final String lowPrice;
@@ -6,6 +7,7 @@ class Quote {
   final String previousClosePrice;
 
   Quote(
+    this.stockSymbol,
     this.openPrice,
     this.highPrice,
     this.lowPrice,

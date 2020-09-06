@@ -52,7 +52,7 @@ class StocksProvider with ChangeNotifier {
   //Providers
   List<Stock> get stocks => _stocks;
   String get exchange => initialExchange;
-  Stream<List> get priceUpdate async* {
+  Stream<List> get stockPrices async* {
     yield priceUpdate;
   }
 

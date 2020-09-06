@@ -1,6 +1,5 @@
 import 'package:Fintech/providers/stocks_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:Fintech/data.dart';
 import 'package:provider/provider.dart';
 
 class HomePageAppBar extends StatelessWidget {
@@ -68,19 +67,20 @@ class HomePageAppBar extends StatelessWidget {
                 onChanged: (itemIdentifier) {
                   switch (itemIdentifier) {
                     case 'crypto':
-                      context.read<StocksProvider>().fetchStocks('crypto');
+                      Provider.of<StocksProvider>(context)
+                          .setExchange('crypto');
 
                       break;
                     case 'US':
-                      context.read<StocksProvider>().fetchStocks('US');
+                      Provider.of<StocksProvider>(context).setExchange('US');
 
                       break;
                     case 'forex':
-                      context.read<StocksProvider>().fetchStocks('forex');
+                      Provider.of<StocksProvider>(context).setExchange('forex');
 
                       break;
                     case 'all':
-                      context.read<StocksProvider>().fetchStocks('all');
+                      Provider.of<StocksProvider>(context).setExchange('all');
 
                       break;
                     default:
