@@ -1,23 +1,21 @@
-import 'package:Fintech/modals/quote.dart';
 import 'package:Fintech/modals/stock.dart';
 import 'package:Fintech/modals/time_series_prices.dart';
-import 'package:Fintech/services/finhub.dart';
+import 'package:Fintech/services/chart_data.dart';
 import 'package:Fintech/widgets/stockspage/line_charts.dart';
 import 'package:Fintech/widgets/stockspage/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:provider/provider.dart';
 
 class StockScreen extends StatefulWidget {
   final Stock stock;
-  final Finhub finHub;
 
-  StockScreen(this.stock, this.finHub);
+  StockScreen(this.stock);
   @override
   _StockScreenState createState() => _StockScreenState();
 }
 
 class _StockScreenState extends State<StockScreen> {
+  final finhub = new ChartData();
   String resolution = "60";
   DateTime pickedDate = DateTime.now().subtract(Duration(days: 1));
 
@@ -49,7 +47,7 @@ class _StockScreenState extends State<StockScreen> {
         pickedDate = DateTime.now().subtract(Duration(days: 2000));
         break;
     }
-    final data = await widget.finHub.getCandles(
+    final data = await finhub.getCandles(
         symbol, resolution, pickedDate, DateTime.now(), widget.stock.type);
 
     return await data;
@@ -84,7 +82,7 @@ class _StockScreenState extends State<StockScreen> {
         appBar: PreferredSize(
             preferredSize:
                 Size.fromHeight(MediaQuery.of(context).size.height * 0.3),
-            child: StockPageAppBar(widget.stock, widget.finHub)),
+            child: StockPageAppBar(widget.stock, finhub)),
         body: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,

@@ -4,10 +4,9 @@ import 'package:Fintech/modals/stock.dart';
 import 'package:Fintech/modals/time_series_prices.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
-import 'package:Fintech/data.dart';
 import 'package:Fintech/config.dart';
 
-class Finhub {
+class ChartData {
   final client = http.Client();
   var priceUpdate = new Map<Stock, Quote>();
   IOWebSocketChannel channel;

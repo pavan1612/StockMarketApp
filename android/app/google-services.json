@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1098898060116",
+    "firebase_url": "https://stocksfirebase.firebaseio.com",
+    "project_id": "stocksfirebase",
+    "storage_bucket": "stocksfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098898060116:android:5a21a02bc3480577610ec1",
+        "android_client_info": {
+          "package_name": "com.example.Fintech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098898060116-mu2ujagbqkjr9rvjihi7u5p0d97gr22o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPLpKV3QcQITWTS90X64ZQdG0nU5fA3uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098898060116-mu2ujagbqkjr9rvjihi7u5p0d97gr22o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

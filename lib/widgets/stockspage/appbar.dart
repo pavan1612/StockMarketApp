@@ -1,13 +1,13 @@
 import 'package:Fintech/modals/quote.dart';
 import 'package:Fintech/modals/stock.dart';
-import 'package:Fintech/services/finhub.dart';
+import 'package:Fintech/services/chart_data.dart';
 import 'package:Fintech/widgets/stockspage/new_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class StockPageAppBar extends StatelessWidget {
   final Stock stock;
-  final Finhub finHub;
+  final ChartData finHub;
 
   StockPageAppBar(this.stock, this.finHub);
 

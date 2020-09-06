@@ -2,13 +2,10 @@ import 'package:Fintech/modals/quote.dart';
 import 'package:Fintech/modals/stock.dart';
 import 'package:Fintech/providers/stocks_provider.dart';
 import 'package:Fintech/screens/stock_screen.dart';
-import 'package:Fintech/services/finhub.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class StocksList extends StatelessWidget {
-  final Finhub finHub;
-  StocksList(this.finHub);
   @override
   Widget build(BuildContext context) {
     final String exchange = Provider.of<StocksProvider>(context).exchange;
@@ -58,7 +55,6 @@ class StocksList extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => StockScreen(
                           stock,
-                          finHub,
                         )));
           },
         ));

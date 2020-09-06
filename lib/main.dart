@@ -1,12 +1,8 @@
-import 'package:Fintech/modals/quote.dart';
 import 'package:Fintech/providers/quotes_provider.dart';
 import 'package:Fintech/providers/stocks_provider.dart';
-import 'package:Fintech/screens/stock_screen.dart';
-import 'package:Fintech/widgets/homepage/stocks_list.dart';
 import 'package:flutter/material.dart';
 import "package:Fintech/screens/homepage.dart";
 import 'package:provider/provider.dart';
-import 'data.dart';
 
 void main() {
   runApp(MyApp());

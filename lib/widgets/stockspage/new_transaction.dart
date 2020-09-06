@@ -1,14 +1,16 @@
 import 'package:Fintech/modals/quote.dart';
 import 'package:Fintech/modals/stock.dart';
-import 'package:Fintech/services/finhub.dart';
+import 'package:Fintech/services/chart_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class NewTransaction extends StatefulWidget {
   final Stock stock;
   final String type;
 
-  final Finhub finHub;
+  final ChartData finHub;
   double value = 1;
   double amount = 1;
   NewTransaction(this.stock, this.finHub, this.type);
@@ -22,12 +24,20 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
     Quote quote = Provider.of<List<Quote>>(context)
         .firstWhere((element) => element.stockSymbol == widget.stock.symbol);
 
     void submitTx() {
-      //
-
+      Map<String, String> transaction = {
+        'userID': 'Pavan',
+        'stockID': widget.stock.symbol,
+        'amount': widget.amount.toStringAsFixed(5),
+        'value': quote.currentPrice,
+        'type': widget.type,
+        'status': 'open',
+      };
+      firestore.collection('transactions').add(transaction);
       Navigator.of(context).pop();
     }
 
