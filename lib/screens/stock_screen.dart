@@ -6,12 +6,13 @@ import 'package:Fintech/widgets/stockspage/line_charts.dart';
 import 'package:Fintech/widgets/stockspage/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:provider/provider.dart';
 
 class StockScreen extends StatefulWidget {
   final Stock stock;
   final Finhub finHub;
-  final Quote quote;
-  StockScreen(this.stock, this.quote, this.finHub);
+
+  StockScreen(this.stock, this.finHub);
   @override
   _StockScreenState createState() => _StockScreenState();
 }
@@ -83,7 +84,7 @@ class _StockScreenState extends State<StockScreen> {
         appBar: PreferredSize(
             preferredSize:
                 Size.fromHeight(MediaQuery.of(context).size.height * 0.3),
-            child: StockPageAppBar(widget.stock, widget.finHub, widget.quote)),
+            child: StockPageAppBar(widget.stock, widget.finHub)),
         body: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,

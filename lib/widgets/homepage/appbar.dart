@@ -36,13 +36,13 @@ class HomePageAppBar extends StatelessWidget {
                   DropdownMenuItem(
                       child: Container(
                         child: Text(
-                          'US Stocks',
+                          'Stock',
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      value: 'US'),
+                      value: 'stock'),
                   DropdownMenuItem(
                       child: Container(
                         child: Text(
@@ -67,20 +67,23 @@ class HomePageAppBar extends StatelessWidget {
                 onChanged: (itemIdentifier) {
                   switch (itemIdentifier) {
                     case 'crypto':
-                      Provider.of<StocksProvider>(context)
+                      Provider.of<StocksProvider>(context, listen: false)
                           .setExchange('crypto');
 
                       break;
-                    case 'US':
-                      Provider.of<StocksProvider>(context).setExchange('US');
+                    case 'stock':
+                      Provider.of<StocksProvider>(context, listen: false)
+                          .setExchange('stock');
 
                       break;
                     case 'forex':
-                      Provider.of<StocksProvider>(context).setExchange('forex');
+                      Provider.of<StocksProvider>(context, listen: false)
+                          .setExchange('forex');
 
                       break;
                     case 'all':
-                      Provider.of<StocksProvider>(context).setExchange('all');
+                      Provider.of<StocksProvider>(context, listen: false)
+                          .setExchange('all');
 
                       break;
                     default:

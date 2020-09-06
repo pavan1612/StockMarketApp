@@ -5,78 +5,12 @@ import 'package:Fintech/modals/time_series_prices.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 import 'package:Fintech/data.dart';
+import 'package:Fintech/config.dart';
 
 class Finhub {
-  final url = "https://finnhub.io/api/v1";
-  final token = "bsf3q2frh5rbsaf4c8p0"; //bt66ff748v6oi7tnpdu0
   final client = http.Client();
-  final webSocketURL = 'wss://ws.finnhub.io?token=';
   var priceUpdate = new Map<Stock, Quote>();
   IOWebSocketChannel channel;
-
-  Stream fetchRealTimeExchangePrice(List<Stock> exchange) async* {
-    //dont remove the below line from here
-    channel = IOWebSocketChannel.connect(webSocketURL + token);
-    try {
-      exchange.forEach((element) async {
-        channel.sink
-            .add(jsonEncode({'type': 'subscribe', 'symbol': element.symbol}));
-
-        priceUpdate[element] = await fetchStockPrice(element.symbol);
-      });
-      channel.stream.listen((response) {
-        var parsedResponse = json.decode(response) as Map;
-        if (parsedResponse['type'] != 'ping') {
-          Map currentPrices = parsedResponse['data'][0];
-
-          int index = exchange
-              .indexWhere((element) => element.symbol == currentPrices['s']);
-          Stock currentStock = exchange.elementAt(index);
-
-          if (priceUpdate.containsKey(currentStock)) {
-            priceUpdate.update(currentStock, (value) {
-              value.currentPrice = currentPrices['p'].toString();
-              return value;
-            });
-          }
-        }
-      });
-    } catch (err) {
-      print(err);
-    }
-    while (true) {
-      await Future.delayed(Duration(seconds: 2));
-
-      yield priceUpdate;
-    }
-  }
-
-  Future fetchStockPrice(String symbol) async {
-    final api = "/quote?symbol=" + symbol + "&token=";
-    final apiURL = url + api + token;
-    final response = await client.get(apiURL);
-    if (response.statusCode == 200) {
-      var priceMap = json.decode(response.body) as Map;
-      return Quote(
-          symbol,
-          priceMap['o'].toString(),
-          priceMap['h'].toString(),
-          priceMap['l'].toString(),
-          priceMap['c'].toString(),
-          priceMap['p'].toString());
-    } else {
-      return Exception("Failed to load");
-    }
-  }
-
-  Stream fetchRealTimeStockPrice(Stock stock) async* {
-    while (true) {
-      if (priceUpdate.containsKey(stock)) {
-        yield (priceUpdate[stock]).currentPrice;
-      }
-      await Future.delayed(Duration(seconds: 1));
-    }
-  }
 
   Future getCandles(String symbol, String resolution, DateTime from,
       DateTime to, String exchange) async {

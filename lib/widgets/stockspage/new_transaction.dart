@@ -2,15 +2,16 @@ import 'package:Fintech/modals/quote.dart';
 import 'package:Fintech/modals/stock.dart';
 import 'package:Fintech/services/finhub.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewTransaction extends StatefulWidget {
   final Stock stock;
   final String type;
-  final Quote quote;
+
   final Finhub finHub;
   double value = 1;
   double amount = 1;
-  NewTransaction(this.stock, this.quote, this.finHub, this.type);
+  NewTransaction(this.stock, this.finHub, this.type);
 
   @override
   _NewTransactionState createState() => _NewTransactionState();
@@ -21,9 +22,8 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    void updatePrice(String currentPrice) {
-      final double amount = double.parse(amountController.text);
-    }
+    Quote quote = Provider.of<List<Quote>>(context)
+        .firstWhere((element) => element.stockSymbol == widget.stock.symbol);
 
     void submitTx() {
       //
@@ -47,12 +47,7 @@ class _NewTransactionState extends State<NewTransaction> {
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Type:' + widget.type),
-            StreamBuilder(
-                stream: widget.finHub.fetchRealTimeStockPrice(widget.stock),
-                builder: (context, snapshot) =>
-                    snapshot.connectionState == ConnectionState.waiting
-                        ? Text('Loading')
-                        : Text('Current Price:' + snapshot.data.toString())),
+            Text('Current Price:' + quote.currentPrice),
             Padding(
               padding: const EdgeInsets.all(28.0),
               child: TextField(
@@ -68,14 +63,10 @@ class _NewTransactionState extends State<NewTransaction> {
                     });
                   }),
             ),
-            StreamBuilder(
-              stream: widget.finHub.fetchRealTimeStockPrice(widget.stock),
-              builder: (context, snapshot) => snapshot.connectionState ==
-                      ConnectionState.waiting
-                  ? Text('Loading')
-                  : Text('value:' +
-                      (double.parse(snapshot.data.toString()) * widget.amount)
-                          .toStringAsFixed(2)),
+            Text(
+              'value:' +
+                  (double.parse(quote.currentPrice) * widget.amount)
+                      .toStringAsFixed(2),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
