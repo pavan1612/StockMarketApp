@@ -14,10 +14,27 @@ class HomePageAppBar extends StatelessWidget {
       bottom: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.22),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Expanded(
+              child: Container(
+                  padding:
+                      EdgeInsets.only(bottom: 5, right: 20, left: 20, top: 5),
+                  child: TextField(
+                      textAlign: TextAlign.center,
+                      onChanged: (value) =>
+                          context.read<StocksProvider>().searchStocks(value),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        hintText: '    Search',
+                        suffixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ))),
+            ),
             Container(
+              padding: EdgeInsets.all(5),
               child: DropdownButton(
                 value: context.watch<StocksProvider>().exchange,
                 icon: Icon(Icons.keyboard_arrow_down,
@@ -91,20 +108,6 @@ class HomePageAppBar extends StatelessWidget {
                 },
               ),
             ),
-            Container(
-                padding:
-                    EdgeInsets.only(bottom: 5, right: 20, left: 20, top: 5),
-                child: TextField(
-                    textAlign: TextAlign.center,
-                    onChanged: (value) =>
-                        context.read<StocksProvider>().searchStocks(value),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.zero,
-                      hintText: '    Search',
-                      suffixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ))),
           ],
         ),
       ),

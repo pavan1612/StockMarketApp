@@ -4,7 +4,6 @@ import 'package:Fintech/services/chart_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class NewTransaction extends StatefulWidget {
   final Stock stock;
