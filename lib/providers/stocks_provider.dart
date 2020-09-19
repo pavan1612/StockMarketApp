@@ -1,4 +1,4 @@
-import 'package:Fintech/modals/stock.dart';
+import 'package:Fintech/models/stock.dart';
 import 'package:Fintech/data.dart';
 import 'package:flutter/material.dart';
 

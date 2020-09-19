@@ -1,5 +1,5 @@
-import 'package:Fintech/modals/stock.dart';
-import 'package:Fintech/modals/time_series_prices.dart';
+import 'package:Fintech/models/stock.dart';
+import 'package:Fintech/models/time_series_prices.dart';
 import 'package:Fintech/services/chart_data.dart';
 import 'package:Fintech/widgets/stockspage/line_charts.dart';
 import 'package:Fintech/widgets/stockspage/appbar.dart';

@@ -1,5 +1,5 @@
-import 'package:Fintech/modals/quote.dart';
-import 'package:Fintech/modals/stock.dart';
+import 'package:Fintech/models/quote.dart';
+import 'package:Fintech/models/stock.dart';
 import 'package:Fintech/services/chart_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

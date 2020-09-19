@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:Fintech/modals/quote.dart';
-import 'package:Fintech/modals/stock.dart';
-import 'package:Fintech/modals/time_series_prices.dart';
+import 'package:Fintech/models/quote.dart';
+import 'package:Fintech/models/stock.dart';
+import 'package:Fintech/models/time_series_prices.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 import 'package:Fintech/config.dart';

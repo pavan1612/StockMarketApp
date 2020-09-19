@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
           child: HomePageAppBar()),
       PreferredSize(
           preferredSize:
-              Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+              Size.fromHeight(MediaQuery.of(context).size.height * 0.18),
           child: PortfolioAppbar()),
       PreferredSize(
           preferredSize:
